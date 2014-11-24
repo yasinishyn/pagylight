@@ -12,5 +12,5 @@ Ohh... there will be a lot.
 ```
 
 ##### Description
-Actualy, code is to simple to wright any documentation.
+Actualy, code is to simple to write any documentation.
 Have fun !
