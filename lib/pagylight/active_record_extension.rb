@@ -6,8 +6,8 @@ module Pagylight
     # where firt parameter is page, and second is record per page
     #
     def pagylight page, records
-      @_page  = page || 1
-      @_pages = count / records
+      @_page  = page.to_i || 1
+      @_pages = count / records.to_i
       offset(@_page*records-records).limit(records)
     end
 
