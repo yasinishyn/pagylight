@@ -1,13 +1,16 @@
 module Pagylight
   module ActiveRecordExtension
+
     #
     # It'll give a simple interface like:
     # Model.pagylight(10, 20)
     # where firt parameter is page, and second is record per page
+    # Return first page if page supplied ins't available
     #
     def pagylight page, records
-      @_page  = page.to_i || 1
       @_pages = count / records.to_i
+      @_page  = page.to_i || 1
+      @_page  = 1 unless [*1..@_pages].include? @_page
       offset(@_page*records-records).limit(records)
     end
 
@@ -23,7 +26,7 @@ module Pagylight
     #
     def pages
       return [*1..@_pages]                 if @_pages <= 10
-      return [*1..8] + [@_pages]           if  @_page <= 5
+      return [*1..8] + [@_pages]           if @_page <= 5
       return [1] + [*(@_pages-7)..@_pages] if [*(@_pages-7)..@_pages].include? @_page
 
       [1]+[*(@_page-3)..(@_page+3)]+[@_pages]
